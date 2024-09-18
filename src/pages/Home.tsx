@@ -1,5 +1,4 @@
 import React from 'react';
-import useWhyDidYouUpdate from 'ahooks/lib/useWhyDidYouUpdate';
 
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
@@ -9,21 +8,12 @@ import Index from '../components/PizzaBlock/Index';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Sort from '../components/Sort';
 import Paginstion from '../components/Pagination/index';
-import { setFilters, filterSliceSelector } from '../redux/slices/filterSlice';
-import {
-  fetchPizzas,
-  pizzaSliceSelector,
-  // SearchPizzaParams,
-} from '../redux/slices/pizzaSlice';
+import { setFilters } from '../redux/slices/filter/slice';
+import { filterSliceSelector } from '../redux/slices/filter/selectors';
+import { fetchPizzas } from '../redux/slices/pizza/slice';
+import { pizzaSliceSelector } from '../redux/slices/pizza/selectors';
 
 import { useDispatch, useSelector } from 'react-redux';
-// import { useAppDispatch } from 'redux/store';
-
-// type SortItem = {
-//   id: number;
-//   name: string;
-//   sort: string;
-// };
 
 export const list = [
   { id: 0, name: 'популярности возр', sort: '-rating' },

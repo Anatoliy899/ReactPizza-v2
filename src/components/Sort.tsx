@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import useWhyDidYouUpdate from 'ahooks/lib/useWhyDidYouUpdate';
 
-import { setSortType } from '../redux/slices/filterSlice';
-import { ClassElement } from 'typescript';
+import { setSortType } from '../redux/slices/filter/slice';
 
 type SortItem = { sortIndex: number; list: any };
 

@@ -1,38 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { list } from '../../pages/Home';
-import { RootState } from '../store';
-
-type FetchPizzasArgs = {
-  typeOfSort: string;
-  category: string;
-  search: string;
-  currentPage: number;
-  sortType: number;
-};
-
-type Pizza = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  type: number;
-  size: number;
-  count: number;
-};
-
-export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-interface pizzaSliceState {
-  items: Pizza[];
-  status: Status;
-  error: string;
-}
+import { list } from '../../../pages/Home';
+import {
+  FetchPizzasArgs,
+  Pizza,
+  pizzaSliceState,
+  Status,
+} from '../pizza/types';
 
 export const fetchPizzas = createAsyncThunk(
   'pizza/fetchPizzasStatus',
@@ -91,24 +66,8 @@ export const pizzaSlice = createSlice({
         state.items = [];
       });
   },
-
-  // extraReducers: {
-  //   [fetchPizzas.pending]: (state, action) => {
-  //     state.status = 'loading';
-  //     console.log(state, 'Отправка');
-  //   },
-  //   [fetchPizzas.fulfilled]: (state, action) => {
-  //     console.log(state, 'Все OK!');
-  //   },
-  //   [fetchPizzas.rejected]: (state, action) => {
-  //     console.log('Ошибка');
-  //   },
-  // },
 });
 
-// Action creators are generated for each case reducer function 2
-
-export const pizzaSliceSelector = (state: RootState) => state.pizzaSlice;
 export const { setItems } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;

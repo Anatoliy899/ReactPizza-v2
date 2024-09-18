@@ -1,13 +1,29 @@
-import { Link, useLocation } from 'react-router-dom';
-import pizzaLogo from '../assets/img/pizza-logo.svg';
-import Search from './Search';
-
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { cartSelector } from '../redux/slices/cartSlice';
+import { Link, useLocation } from 'react-router-dom';
+
+import Search from './Search';
+import { cartSelector } from '../redux/slices/cart/selectors';
+import pizzaLogo from '../assets/img/pizza-logo.svg';
+import { CartItem } from '../redux/slices/cart/types';
 
 const Header = () => {
   const location = useLocation();
   const { items, totalPrice } = useSelector(cartSelector);
+
+  // ------------- Реализация localStorage -------------
+  // Еслм не использовать useRef, будет перезаписываться на пустой []
+  const isMounted = React.useRef(false);
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  }, [items]);
+
+  // ------------- Реализация localStorage -------------
 
   return (
     <div className="header">
@@ -58,7 +74,10 @@ const Header = () => {
                 />
               </svg>
               <span>
-                {items.reduce((sum: number, obj: any) => sum + obj.count, 0)}
+                {items.reduce(
+                  (sum: number, obj: CartItem) => sum + obj.count,
+                  0
+                )}
               </span>
             </Link>
           )}

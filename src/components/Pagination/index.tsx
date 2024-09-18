@@ -2,7 +2,7 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.scss';
 
-import { setCurrentPage } from '../../redux/slices/filterSlice';
+import { setCurrentPage } from '../../redux/slices/filter/slice';
 import { useDispatch } from 'react-redux';
 
 type PaginstionProps = { currentPage: number };
